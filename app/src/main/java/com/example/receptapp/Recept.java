@@ -7,21 +7,29 @@ public class Recept {
     String description;
     int image;
     int favoriteImage;
+    boolean favorite;
 
+    public boolean isFavorite() {
+        return favorite;
+    }
 
-
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 
     public Recept(String title, String description, int image) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.favoriteImage = R.drawable.ic_favorite_border_black_24dp;
+        this.favorite = false;
     }
     public Recept(String title, String description) {
         this.title = title;
         this.description = description;
-        this.image = R.drawable.ic_restaurant_white_24dp;
+        this.image = R.drawable.ic_restaurant_color_24dp;
         this.favoriteImage = R.drawable.ic_favorite_border_black_24dp;
+        this.favorite = false;
     }
 
     public int getImage(){

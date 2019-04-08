@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,17 +20,15 @@ import java.util.List;
 
 public class RecepieListAdapter extends RecyclerView.Adapter {
 
-    public interface RecepieListListener{
-        void onRecepieClick(CharSequence input);
-    }
-
     private static List<Recept> recepieList;
+    private Context context;
     public static class RecepieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView textView;
         public TextView textView2;
         public ImageView imageView;
         public ImageView favoriteButton;
-       // public Button favoriteButton
+        public RelativeLayout main;
+
 
         public RecepieViewHolder(@NonNull View itemView) {
 
@@ -41,7 +40,11 @@ public class RecepieListAdapter extends RecyclerView.Adapter {
             textView2 = itemView.findViewById(R.id.recepieSquareDesc);
             imageView = itemView.findViewById(R.id.recepieSquareImage);
             favoriteButton = itemView.findViewById(R.id.favoriteButtonID);
+            main = itemView.findViewById(R.id.recepieSquareMain);
+            main.setOnClickListener(this);
+            favoriteButton.setOnClickListener(this);
             //Button = itemView.findViewById((R.id.favoriteButton));
+
 
         }
 
@@ -51,21 +54,46 @@ public class RecepieListAdapter extends RecyclerView.Adapter {
 
             Recept recepieItem = recepieList.get(position);
 
+            if(v.getId() == R.id.recepieSquareMain){
+                Intent intent = new Intent(v.getContext(), RecepieActivity.class);
+                intent.putExtra("title", recepieItem.getTitle());
+                intent.putExtra("image", recepieItem.getImage());
+                intent.putExtra("description", recepieItem.getDescription());
+                intent.putExtra("isFav", recepieItem.isFavorite());
+                v.getContext().startActivity(intent);
 
-           // Toast.makeText(context , recepieItem.getTitle(), Toast.LENGTH_LONG).show();
-            Log.d("Test", recepieItem.getTitle());
+
+            }
+            if(v.getId() == R.id.favoriteButtonID){
 
 
 
-            favoriteButton.setImageResource(R.drawable.ic_favorite_color_24dp);
+                Log.d("Test", recepieItem.getTitle());
+                if(!recepieItem.isFavorite()){
+                    favoriteButton.setImageResource(R.drawable.ic_favorite_color_24dp);
+                    Toast.makeText(v.getContext() , "Recept tillagt i favoriter", Toast.LENGTH_SHORT).show();
+                    recepieItem.setFavorite(true);
+                }else{
+                    favoriteButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    Toast.makeText(v.getContext() , "Recept borttaget ur favoriter", Toast.LENGTH_SHORT).show();
+                    recepieItem.setFavorite(false);
+                }
+            }
+           //
+
+
+
 
 
         }
+
+
 
     }
 
     public RecepieListAdapter(List<Recept> recepieList) {
         this.recepieList = recepieList;
+
 
     }
 
@@ -76,6 +104,7 @@ public class RecepieListAdapter extends RecyclerView.Adapter {
         View view = (View) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recepie_square, viewGroup, false);
 
         RecepieViewHolder recepieViewHolder = new RecepieViewHolder(view);
+        context = viewGroup.getContext();
         return recepieViewHolder;
     }
 

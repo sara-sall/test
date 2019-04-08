@@ -38,7 +38,7 @@ public class RecepieListFragmentActivity extends Fragment{
             receptLista.add(new Recept("Pasta carbonara", "Pasta, ost, bacon och grädde", R.drawable.beef_liten));
             receptLista.add(new Recept("Spaghetti och köttfärssås", "Köttfärs, tomatsås, spaghetti", R.drawable.beef_liten));
             receptLista.add(new Recept("Pannkakor", "Mjölk, ägg och mjöl", R.drawable.beef_liten));
-            receptLista.add(new Recept("Sallad", "Tomater, Gurka, Paprika och salladsblad", R.drawable.ic_restaurant_white_24dp));
+            receptLista.add(new Recept("Sallad", "Tomater, Gurka, Paprika och salladsblad"));
             receptLista.add(new Recept("Muffins", "Mjöl, socker, kakao, ägg"));
 
 
