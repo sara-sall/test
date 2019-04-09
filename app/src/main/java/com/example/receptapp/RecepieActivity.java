@@ -28,6 +28,7 @@ public class RecepieActivity extends AppCompatActivity {
 
         titleText = (TextView) findViewById(R.id.recepieATitleID);
         descText = (TextView) findViewById(R.id.recepieADescID);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Bundle b = new Bundle();
         b = getIntent().getExtras();
@@ -42,12 +43,14 @@ public class RecepieActivity extends AppCompatActivity {
             descText.setText(desc);
         }
 
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        if(isFavorite){
+            fab.setImageResource(R.drawable.ic_favorite_white_24dp);
+
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

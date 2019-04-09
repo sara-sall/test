@@ -14,6 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     Fragment favoritesFragment;
     Fragment profileFragment;
 
+/*    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference receptRef = db.collection("recept");
+
+    private String title;
+    private String desc;
+    private ArrayList<String> ingredients;
+    private String inst;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +44,27 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarID);
         setSupportActionBar(toolbar);
+
+        final ArrayList<Recept> receptLista;
+        //        receptLista = new ArrayList<Recept>();
+        //
+        //        // public void loadRecepes(View v){
+        //        receptRef.get()
+        //                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        //                    @Override
+        //                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        //                        for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+        //                            Recept recept = documentSnapshot.toObject(Recept.class);
+        //                            receptLista.add(recept);
+        //                        }
+        //                    }
+        //                });
+        //
+        //
+        //        // }
+
+
+
 
 //        View decorView = getWindow().getDecorView();
 //
