@@ -1,9 +1,7 @@
 package com.example.receptapp;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class RecepieListAdapter extends RecyclerView.Adapter {
+public class FavoriteListAdapter extends RecyclerView.Adapter {
 
     private static List<Recept> recepieList;
     private Context context;
@@ -44,6 +40,7 @@ public class RecepieListAdapter extends RecyclerView.Adapter {
             main = itemView.findViewById(R.id.recepieSquareMain);
             main.setOnClickListener(this);
             favoriteButton.setOnClickListener(this);
+
 
 
         }
@@ -91,7 +88,7 @@ public class RecepieListAdapter extends RecyclerView.Adapter {
 
     }
 
-    public RecepieListAdapter(List<Recept> recepieList) {
+    public FavoriteListAdapter(List<Recept> recepieList) {
         this.recepieList = recepieList;
 
 
@@ -101,16 +98,19 @@ public class RecepieListAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = (View) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recepie_square, viewGroup, false);
+        View view = (View) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.favorite_square, viewGroup, false);
 
         RecepieViewHolder recepieViewHolder = new RecepieViewHolder(view);
         context = viewGroup.getContext();
         return recepieViewHolder;
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         RecepieViewHolder vh = (RecepieViewHolder) viewHolder;
+        vh.textView.setText("Du har inga favoriter sparade!");
         vh.textView.setText(recepieList.get(i).getTitle());
         vh.textView2.setText(recepieList.get(i).getDescription());
         vh.imageView.setImageResource(recepieList.get(i).getImage());

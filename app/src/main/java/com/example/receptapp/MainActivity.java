@@ -1,24 +1,13 @@
 package com.example.receptapp;
 
-import android.app.ActionBar;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -28,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment recepieListFragment;
     Fragment favoritesFragment;
     Fragment profileFragment;
+    Toolbar toolbar;
 
 /*    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference receptRef = db.collection("recept");
@@ -42,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbarID);
+        toolbar = (Toolbar) findViewById(R.id.toolbarID);
+        toolbar.setTitle(R.string.toolbarTitleRecepe);
         setSupportActionBar(toolbar);
+
 
         final ArrayList<Recept> receptLista;
         //        receptLista = new ArrayList<Recept>();
@@ -76,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         recepieListFragment = new RecepieListFragmentActivity();
-        favoritesFragment = new FavoritesFragment();
-        profileFragment = new RecepieFragment();//Profile();
+        favoritesFragment = new FavoriteListFragmentActivity();
+        profileFragment = new ProfileFragment();
 
         getSupportFragmentManager().beginTransaction().add(R.id.container_mainID, recepieListFragment).commit();
 
@@ -91,14 +83,17 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.nav_recepies:
                     selectedFragment = recepieListFragment;
+                    toolbar.setTitle(R.string.toolbarTitleRecepe);
                     break;
 
                 case R.id.nav_favorites:
                     selectedFragment = favoritesFragment;
+                    toolbar.setTitle(R.string.toolbarTitleFav);
                     break;
 
                 case R.id.nav_profile:
                     selectedFragment = profileFragment;
+                    toolbar.setTitle(R.string.toolbarTitleProf);
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.container_mainID, selectedFragment).commit();
